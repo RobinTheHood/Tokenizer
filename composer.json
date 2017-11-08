@@ -1,0 +1,20 @@
+{
+    "name": "robinthehood/tokenizer",
+    "type": "library",
+    "description": "With Tokenizer you can easily convert a string to a stream or array of tokens.",
+    "keywords": ["tokenizer", "token", "parser", "lexer"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Robin Wieschendorf",
+            "email": "mail@robinwieschendorf.de",
+            "homepage": "http://robinwieschendorf.de",
+            "role": "Project Founder"
+        }
+    ],
+    "autoload": {
+        "psr-4" : {
+            "Tokenizer\\" : "src"
+        }
+    }
+}
