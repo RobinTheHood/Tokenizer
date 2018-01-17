@@ -1,5 +1,5 @@
 <?php
-namespace Tokenizer;
+namespace RobinTheHood\Tokenizer;
 
 class Token
 {

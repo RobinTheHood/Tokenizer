@@ -5,8 +5,8 @@ Run this file on the console with:
 */
 require_once '../vendor/autoload.php';
 
-use Tokenizer\Tokenizer;
-use Terminal\Terminal;
+use RobinTheHood\Tokenizer\Tokenizer;
+use RobinTheHood\Terminal\Terminal;
 
 if (!class_exists('Terminal\Terminal')) {
     echo "*** For this example you have to install 'robinthehood/terminal' ***\n";

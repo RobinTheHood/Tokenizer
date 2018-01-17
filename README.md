@@ -23,7 +23,7 @@ composer require robinthehood/tokenizer
 ```php
 require 'vendor/autoload.php'; // if you are using Composer
 
-$tokenizer = new Tokenizer\Tokenizer(__FILE__, 'token_php.php');
+$tokenizer = new RobinTheHood\Tokenizer\Tokenizer(__FILE__, 'token_php.php');
 $tokens = $tokenizer->getAllTokens();
 print_r($tokens);
 ```
