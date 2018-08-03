@@ -11,11 +11,22 @@ class Tokenizer
     private $contextStack = ['default'];
     private $contextStackPointer = 0;
 
-    public function __construct($filePath, $definitionPath)
+    public function __construct($filePath = '', $definitionPath = '')
     {
-        $this->fileContent = file_get_contents($filePath);
-        $this->fileLength = strlen($this->fileContent);
-        $this->definition = include $definitionPath;
+        if (file_exists($filePath)) {
+            $this->fileContent = file_get_contents($filePath);
+            $this->fileLength = strlen($this->fileContent);
+        }
+
+        if (file_exists($definitionPath)) {
+            $this->definition = include $definitionPath;
+        }
+    }
+
+    public function setContent($string)
+    {
+        $this->fileContent = $string;
+        $this->fileLength = strlen($string);
     }
 
     public function getAllTokens()
@@ -41,10 +52,12 @@ class Tokenizer
                     return new Token('T_UNKNOWN', $unknown, $this->filePointer);
                 }
 
-                if ($element['rule']['context'] == '_back' ) {
-                    $this->contextStackPointer--;
-                } else if ($element['rule']['context']) {
-                    $this->contextStack[++$this->contextStackPointer] = $element['rule']['context'];
+                if (isset($element['rule']['context'])) {
+                    if ($element['rule']['context'] == '_back' ) {
+                        $this->contextStackPointer--;
+                    } else if ($element['rule']['context']) {
+                        $this->contextStack[++$this->contextStackPointer] = $element['rule']['context'];
+                    }
                 }
 
                 $matchIndex = 0;
@@ -79,6 +92,8 @@ class Tokenizer
     public function selectElementByLongestMatch($elements)
     {
         $matchIndex = 0;
+        $maxLength = 0;
+        $selectedElement = null;
         foreach($elements as $element) {
             $length = strlen($element['matches'][$matchIndex][0]);
             if ($length > $maxLength) {
